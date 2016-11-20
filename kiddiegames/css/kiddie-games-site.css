@@ -9,6 +9,12 @@ body{
     font-family: 'Baloo Da', cursive;
 }
 
+.menu-block:hover{
+    color: #eee;
+    background-color: #333;
+}
+
+
 
 .menu-block{
 
