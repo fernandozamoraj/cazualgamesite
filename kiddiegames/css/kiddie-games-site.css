@@ -1,0 +1,25 @@
+
+body{
+        font-family: 'Baloo Da', cursive;
+        color: #555;
+}
+
+.title{
+    text-align: center;
+    font-family: 'Baloo Da', cursive;
+}
+
+
+.menu-block{
+
+    border: solid;
+    border-width: 0px,50px,0px,50px;
+    border-color:  #fff;
+    font-family: 'Baloo Da', cursive;
+    min-height: 200px;
+    font-size: 300%;
+    background-color: #e1e1e1;
+    padding: 25px;
+    color: #aaa;
+    text-align: center;
+}
