@@ -478,11 +478,11 @@ function Scene(){
 
     this.start = function(){
         //set up keyboard reader if not a touch screen.
-        if (!this.touchable){
+        //if (!this.touchable){ //changed to work on pcs with touch screens
             this.initKeys();
             document.onkeydown = this.updateKeys;
             document.onkeyup = this.clearKeys;
-        } // end if
+        //} // end if
         this.intID = setInterval(localUpdate, 50);
         document.onmousemove = this.updateMousePos;
         document.mouseClicked = false;
