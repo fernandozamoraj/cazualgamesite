@@ -68,6 +68,7 @@ function Game(){
   var _scoreSprite = false;
   var _killedLetters = [];
   var MAX_WORDS = 50;  
+  var START_PROMPT = "Start typing - backspace or space to clear"
   
   
   function getRandomChar(){
@@ -146,7 +147,7 @@ function Game(){
 
     temp.setMoveAngle(DOWN_ANGLE);
     temp.setSpeed(0);  
-    temp.randomString = "Start typing what you see - backspace or space to clear"; 
+    temp.randomString = START_PROMPT; 
     //not sure that this matters since I am not using an image
     temp.loadAnimation(136, 34, 34, 34);
 
@@ -331,6 +332,19 @@ function createSentinels(){
     sprite.writeText(fontFamily, fontSize, fontColor, text, sprite.x +(offset*25), sprite.y);
   }
 
+
+  function writeCurrentWord(sprite, text, offset){
+    var fontFamily = GAME_FONT;
+    var fontSize = "25";
+    var fontColor = "#ddddff";
+
+    var shadesOfGreen = ["#ffeeee", "#00dd00", "#aadd00", "#00dd00", "#00dddd"];
+    var fontColor = shadesOfGreen[Math.floor(Math.random()*shadesOfGreen.length)]; 
+    var x =    sprite.x - (text.length  * 10)/2;
+    if(x < 50) x = 50;
+    sprite.writeText(fontFamily, fontSize, fontColor, text, sprite.x - (text.length  * 10)/2, sprite.y);
+  }
+
   function getKeyDownChar(){
     var key = "";
     var i = 0;
@@ -363,7 +377,7 @@ function createSentinels(){
         //if backspace is pressed clear the word
         if(keysDown[32] || keysDown[8]){
 
-          if(_currentWord.randomString == "Start typing what you see - backspace or space to clear")
+          if(_currentWord.randomString == START_PROMPT)
             _currentWord.randomString = "";
           if( _currentWord.randomString.length == 1) _currentWord.randomString = "";
           if(_currentWord.randomString.length > 1){
@@ -382,7 +396,7 @@ function createSentinels(){
         }
 
           _currentWord.update();          
-        writeTextInAShadeOfGreen(_currentWord, _currentWord.randomString.toLowerCase(), 0);
+        writeCurrentWord(_currentWord, _currentWord.randomString.toLowerCase(), 0);
       }
   }
 
@@ -491,11 +505,12 @@ function createSentinels(){
       //*****************
       var textValue = "*", i = 0, j = 0;
 
-      if(gameIsOver()){
-        return;
+      if(!gameIsOver()){
+        
+        updateCurrentWord();
       }
 
-      updateCurrentWord();  
+        
       updateKilledLetters();
       for(i = 0; i < _sentinels.length; i++){
           _sentinels[i].update();          
